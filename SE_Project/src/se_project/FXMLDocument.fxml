@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -39,6 +40,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </MenuBar>
+                              <TextField fx:id="shapeText" />
                               <Label text="Outline">
                                  <VBox.margin>
                                     <Insets left="5.0" />
@@ -70,11 +72,13 @@
                               </Button>
                            </children>
                         </VBox>
+                        <Button fx:id="saveBtn" layoutX="4.0" layoutY="237.0" mnemonicParsing="false" onAction="#save" prefHeight="33.0" prefWidth="67.0" text="SAVE" />
+                        <Button fx:id="loadBtn" layoutX="6.0" layoutY="276.0" mnemonicParsing="false" onAction="#load" text="LOAD" />
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="703.0" prefWidth="924.0">
                      <children>
-                        <Pane fx:id="DrawingWindow" layoutX="90.0" layoutY="46.0" onMousePressed="#initDraw" onMouseReleased="#draw" prefHeight="334.6666666666667" prefWidth="393.3333333333333" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Pane fx:id="DrawingWindow" layoutX="90.0" layoutY="-1.0" onMousePressed="#initDraw" onMouseReleased="#draw" prefHeight="731.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
                      </children>
                   </AnchorPane>
               </items>

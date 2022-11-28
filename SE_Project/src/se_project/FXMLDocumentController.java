@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -52,10 +53,18 @@ public class FXMLDocumentController implements Initializable {
     EllipseTool ellipseTool=new EllipseTool();
     LineTool lineTool=new LineTool();
     Invoker invoker= new Invoker();
+    @FXML
+    private Button saveBtn;
+    @FXML
+    private Button loadBtn;
+    @FXML
+    private TextField shapeText;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        shapeText.setEditable(false);
+        
     }    
     @FXML
     private void initDraw(MouseEvent event) {
@@ -82,16 +91,20 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void setRectangle(ActionEvent event) {
         toolBar.setCurrentState(recTool);
+        
+        shapeText.setText("Rectangle");
     }
 
     @FXML
     private void setEllipse(ActionEvent event) {
         toolBar.setCurrentState(ellipseTool);
+        shapeText.setText("Ellipse");
     }
 
     @FXML
     private void setLine(ActionEvent event) {
         toolBar.setCurrentState(lineTool);
+        shapeText.setText("Line");
     }
 
     @FXML
@@ -112,5 +125,14 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void clear(ActionEvent event) {
         DrawingWindow.getChildren().clear();
+    }
+
+    @FXML
+    private void save(ActionEvent event) {
+        
+    }
+
+    @FXML
+    private void load(ActionEvent event) {
     }
 }
