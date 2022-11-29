@@ -71,9 +71,9 @@ public class FXMLDocumentController implements Initializable {
     LineTool lineTool=new LineTool();
     Invoker invoker= new Invoker();
     @FXML
-    private Button saveBtn;
+    private MenuItem saveBtn;
     @FXML
-    private Button loadBtn;
+    private MenuItem loadBtn;
     @FXML
     private TextField shapeText;
     @Override
