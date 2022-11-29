@@ -10,12 +10,24 @@ import Tool.RectangleTool;
 import Tool.ToolBar;
 import command.DrawCommand;
 import command.Invoker;
+import java.beans.DefaultPersistenceDelegate;
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -28,6 +40,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 
 
 public class FXMLDocumentController implements Initializable {
@@ -50,7 +63,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Pane DrawingWindow;
     
-
+    private static final java.nio.file.Path SAVE_FILE_LOCATION =
+    Paths.get(System.getProperty("user.home"), "shapes.xml");
     ToolBar toolBar=new ToolBar();
     RectangleTool recTool=new RectangleTool();
     EllipseTool ellipseTool=new EllipseTool();
@@ -62,7 +76,6 @@ public class FXMLDocumentController implements Initializable {
     private Button loadBtn;
     @FXML
     private TextField shapeText;
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -94,7 +107,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void setRectangle(ActionEvent event) {
         toolBar.setCurrentState(recTool);
-        
         shapeText.setText("Rectangle");
     }
 
@@ -132,13 +144,37 @@ public class FXMLDocumentController implements Initializable {
         if(result.get()==ButtonType.OK)
             DrawingWindow.getChildren().clear();
     }
+   
+    @FXML
+    private void save(ActionEvent event){
+        XMLEncoder encoder;
+        try {
+            encoder = new XMLEncoder(new BufferedOutputStream(
+                    Files.newOutputStream(SAVE_FILE_LOCATION)));
+            encoder.setPersistenceDelegate(Color.class,new DefaultPersistenceDelegate(
+                    new String[]{"red", "green", "blue","opacity"}));
+            encoder.writeObject(DrawingWindow.getChildren().toArray(new Node[0]));
+            encoder.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
 
     @FXML
-    private void save(ActionEvent event) {
-        
+    private void load(ActionEvent event){
+        XMLDecoder decoder;
+        try {
+            decoder = new XMLDecoder(new BufferedInputStream(
+                    Files.newInputStream(SAVE_FILE_LOCATION)));
+            DrawingWindow.getChildren().setAll((Node[]) decoder.readObject());
+            decoder.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
-    @FXML
-    private void load(ActionEvent event) {
-    }
+    
 }
+    
+

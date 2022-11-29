@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_111" class="java.beans.XMLDecoder">
+<void class="javafx.scene.shape.Ellipse">
+ <void property="centerY">
+  <double>232.6</double>
+ </void>
+ <void property="radiusX">
+  <double>65.0</double>
+ </void>
+ <void property="radiusY">
+  <double>34.00000000000003</double>
+ </void>
+ <void property="centerX">
+  <double>272.6</double>
+ </void>
+</void>
+</java>
