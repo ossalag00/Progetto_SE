@@ -13,13 +13,11 @@ import command.Invoker;
 import java.beans.DefaultPersistenceDelegate;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -63,8 +61,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Pane DrawingWindow;
     
-    private static final java.nio.file.Path SAVE_FILE_LOCATION =
-    Paths.get(System.getProperty("user.home"), "shapes.xml");
     ToolBar toolBar=new ToolBar();
     RectangleTool recTool=new RectangleTool();
     EllipseTool ellipseTool=new EllipseTool();
@@ -80,6 +76,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         shapeText.setEditable(false);
+        
         
     }    
     @FXML
@@ -147,10 +144,17 @@ public class FXMLDocumentController implements Initializable {
    
     @FXML
     private void save(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+ 
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Xml files (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extFilter);
+        
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(DrawingWindow.getScene().getWindow());
         XMLEncoder encoder;
         try {
-            encoder = new XMLEncoder(new BufferedOutputStream(
-                    Files.newOutputStream(SAVE_FILE_LOCATION)));
+            encoder = new XMLEncoder(new FileOutputStream(new File(file.getPath())));
             encoder.setPersistenceDelegate(Color.class,new DefaultPersistenceDelegate(
                     new String[]{"red", "green", "blue","opacity"}));
             encoder.writeObject(DrawingWindow.getChildren().toArray(new Node[0]));
@@ -164,10 +168,17 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void load(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+ 
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Xml files (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        //Show open file dialog
+        File file = fileChooser.showOpenDialog(DrawingWindow.getScene().getWindow());
         XMLDecoder decoder;
         try {
-            decoder = new XMLDecoder(new BufferedInputStream(
-                    Files.newInputStream(SAVE_FILE_LOCATION)));
+            decoder = new XMLDecoder(new FileInputStream(new File(file.getPath())));
             DrawingWindow.getChildren().setAll((Node[]) decoder.readObject());
             decoder.close();
         } catch (IOException ex) {
