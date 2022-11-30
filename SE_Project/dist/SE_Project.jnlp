@@ -8,12 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="SE_Project.jar" size="11184" download="eager" />
-    <jar href="lib\junit-4.12.jar" size="316791" download="eager" />
+    <jar href="SE_Project.jar" size="12898" download="eager" />
+    <jar href="lib\junit-4.13.2.jar" size="384581" download="eager" />
   </resources>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="SE_Project" >
-    <param name="requiredFXVersion" value="8.0+"/>
-  </applet-desc>
   <jfx:javafx-desc  width="800" height="600" main-class="se_project.SE_Project"  name="SE_Project" />
   <update check="always"/>
 </jnlp>

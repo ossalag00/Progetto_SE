@@ -61,4 +61,7 @@ public abstract class Tool {
         return new Line();
     }
     
+    public void select(Shape s){
+        
+    }
 }

@@ -4,12 +4,8 @@
  */
 package se_project;
 
-import Tool.EllipseTool;
-import Tool.LineTool;
-import Tool.RectangleTool;
-import Tool.ToolBar;
-import command.DrawCommand;
-import command.Invoker;
+import Tool.*;
+import command.*;
 import java.beans.DefaultPersistenceDelegate;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -38,6 +34,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
 
 
@@ -66,12 +63,15 @@ public class FXMLDocumentController implements Initializable {
     EllipseTool ellipseTool=new EllipseTool();
     LineTool lineTool=new LineTool();
     Invoker invoker= new Invoker();
+    SelectTool selectTool=new SelectTool();
     @FXML
     private MenuItem saveBtn;
     @FXML
     private MenuItem loadBtn;
     @FXML
     private TextField shapeText;
+    @FXML
+    private Button selectBtn;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -183,6 +183,20 @@ public class FXMLDocumentController implements Initializable {
             decoder.close();
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void setSelect(ActionEvent event) {
+        toolBar.setCurrentState(selectTool);
+        shapeText.setText("");
+    }
+
+    @FXML
+    private void selectClick(MouseEvent event) {
+        if(event.getTarget() instanceof Shape){
+            invoker.setCommand(new SelectCommand(toolBar.getCurrentState(),(Shape)event.getTarget()));
+            invoker.executeCommand();   
         }
     }
     

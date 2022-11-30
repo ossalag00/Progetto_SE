@@ -86,13 +86,18 @@
                                     <Insets left="5.0" top="5.0" />
                                  </VBox.margin>
                               </Button>
+                              <Button fx:id="selectBtn" mnemonicParsing="false" onAction="#setSelect" text="Select">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Button>
                            </children>
                         </VBox>
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="703.0" prefWidth="924.0">
                      <children>
-                        <Pane fx:id="DrawingWindow" layoutX="90.0" layoutY="-1.0" onMousePressed="#initDraw" onMouseReleased="#draw" prefHeight="731.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
+                        <Pane fx:id="DrawingWindow" layoutX="90.0" layoutY="-1.0" onMouseClicked="#selectClick" onMousePressed="#initDraw" onMouseReleased="#draw" prefHeight="731.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
                      </children>
                   </AnchorPane>
               </items>
