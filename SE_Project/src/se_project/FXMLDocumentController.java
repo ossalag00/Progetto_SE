@@ -4,12 +4,8 @@
  */
 package se_project;
 
-import Tool.EllipseTool;
-import Tool.LineTool;
-import Tool.RectangleTool;
-import Tool.ToolBar;
-import command.DrawCommand;
-import command.Invoker;
+import Tool.*;
+import command.*;
 import java.beans.DefaultPersistenceDelegate;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -31,13 +27,17 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
 
 
@@ -66,12 +66,23 @@ public class FXMLDocumentController implements Initializable {
     EllipseTool ellipseTool=new EllipseTool();
     LineTool lineTool=new LineTool();
     Invoker invoker= new Invoker();
+    SelectTool selectTool= new SelectTool();
     @FXML
     private MenuItem saveBtn;
     @FXML
     private MenuItem loadBtn;
     @FXML
     private TextField shapeText;
+    @FXML
+    private Button selectBtn;
+    @FXML
+    private ContextMenu contextMenu;
+    @FXML
+    private MenuItem move;
+    @FXML
+    private MenuItem recolor;
+    @FXML
+    private MenuItem delete;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -170,11 +181,10 @@ public class FXMLDocumentController implements Initializable {
     private void load(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
  
-        //Set extension filter for text files
+        
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Xml files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
 
-        //Show open file dialog
         File file = fileChooser.showOpenDialog(DrawingWindow.getScene().getWindow());
         XMLDecoder decoder;
         try {
@@ -184,6 +194,47 @@ public class FXMLDocumentController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @FXML
+    private void setSelect(ActionEvent event) {
+        toolBar.setCurrentState(selectTool);
+        shapeText.setText("Select");
+        
+    }
+
+    @FXML
+    private void contextMenuShow(ContextMenuEvent event) {
+    }
+
+    @FXML
+    private void click(MouseEvent event) {
+                if(toolBar.getCurrentState()==selectTool){
+            if(event.getButton().equals(MouseButton.PRIMARY)){
+                if(event.getTarget() instanceof Shape){
+                    invoker.setCommand(new SelectCommand(selectTool,(Shape)event.getTarget()));
+                    invoker.executeCommand();
+                   
+                }
+                else{
+                    if(selectTool.getSelectedShape()!=null){
+                    selectTool.deSelect();
+                    }
+                }
+            }
+        }
+    }
+
+    @FXML
+    private void moveShape(ActionEvent event) {
+    }
+
+    @FXML
+    private void recolorShape(ActionEvent event) {
+    }
+
+    @FXML
+    private void deleteaShape(ActionEvent event) {
     }
     
 }

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane id="Window" fx:id="Window" alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" text="DRAWING WINDOW" textAlignment="CENTER" textOverrun="CLIP" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se_project.FXMLDocumentController">
+<TitledPane id="Window" fx:id="Window" alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" text="DRAWING WINDOW" textAlignment="CENTER" textOverrun="CLIP" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se_project.FXMLDocumentController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
@@ -24,7 +25,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="207.0">
                      <children>
-                        <VBox prefHeight="415.0" prefWidth="237.0">
+                        <VBox prefHeight="732.0" prefWidth="236.0">
                            <children>
                               <MenuBar>
                                 <menus>
@@ -67,7 +68,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />                       
                                  </VBox.margin>
                                  <value>
-                                    <Color blue="0.0" green="0.0" red="0.0" />
+                                    <Color red="0.0" green="0.0" blue="0.0" />
                                  </value>
                               </ColorPicker>
                               
@@ -81,9 +82,14 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </ColorPicker>
-                              <Button fx:id="clear" mnemonicParsing="false" onAction="#clear" text="Clear">
+                              <Button fx:id="clear" mnemonicParsing="false" onAction="#clear" prefHeight="33.0" prefWidth="66.0" text="Clear">
                                  <VBox.margin>
-                                    <Insets left="5.0" top="5.0" />
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button fx:id="selectBtn" mnemonicParsing="false" onAction="#setSelect" prefHeight="33.0" prefWidth="66.0" text="Select">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </Button>
                            </children>
@@ -92,7 +98,7 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="703.0" prefWidth="924.0">
                      <children>
-                        <Pane fx:id="DrawingWindow" layoutX="90.0" layoutY="-1.0" onMousePressed="#initDraw" onMouseReleased="#draw" prefHeight="731.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
+                        <Pane fx:id="DrawingWindow" layoutX="90.0" layoutY="-1.0" onContextMenuRequested="#contextMenuShow" onMouseClicked="#click" onMousePressed="#initDraw" onMouseReleased="#draw" prefHeight="731.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
                      </children>
                   </AnchorPane>
               </items>
@@ -102,4 +108,13 @@
    <font>
       <Font name="Berlin Sans FB Demi Bold" size="18.0" />
    </font>
+   <contextMenu>
+      <ContextMenu id="contextMenu" fx:id="contextMenu">
+        <items>
+          <MenuItem fx:id="move" mnemonicParsing="false" onAction="#moveShape" text="Move" />
+            <MenuItem fx:id="recolor" mnemonicParsing="false" onAction="#recolorShape" text="Recolor" />
+            <MenuItem fx:id="delete" mnemonicParsing="false" onAction="#deleteaShape" text="Delete" />
+        </items>
+      </ContextMenu>
+   </contextMenu>
 </TitledPane>
