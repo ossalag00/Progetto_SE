@@ -4,6 +4,9 @@
  */
 package Tool;
 
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
@@ -12,21 +15,21 @@ import javafx.scene.shape.Shape;
  * @author lessa
  */
 public class SelectTool extends Tool {
-     private Shape selectedShape;
+    private Shape selectedShape;
     private boolean toggle=true;
-    private Color colorOut;
     
-    @Override
+    
     public void select(Shape s){
         if(toggle){
-        this.setSelectedShape(s);
-        this.colorOut=(Color)s.getStroke();
-        this.selectedShape.getStrokeDashArray().addAll(25d,10d);
-        this.selectedShape.setStroke(Color.RED);
-        this.toggle=false;
+            this.setSelectedShape(s);
+            Effect effect = new DropShadow(BlurType.GAUSSIAN, Color.RED, 5, 0.75, 0, 0);
+            this.selectedShape.setEffect(effect);
+            this.toggle=false;
         }else{
             this.deSelect();
         }
+        
+        
     }
 
     public Shape getSelectedShape() {
@@ -37,11 +40,19 @@ public class SelectTool extends Tool {
         this.selectedShape = selectedShape;
     }
     
-    private void deSelect(){
-        this.selectedShape.getStrokeDashArray().clear();
-        this.selectedShape.setStroke(colorOut);
+    public void deSelect(){  
+        this.selectedShape.setEffect(null);
         this.toggle=true;
-       
+        this.selectedShape=null;
     }
+
+    public boolean isToggle() {
+        return toggle;
+    }
+
+    public void setToggle(boolean toggle) {
+        this.toggle = toggle;
+    }
+     
     
 }
