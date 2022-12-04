@@ -227,6 +227,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void moveShape(ActionEvent event) {
+        invoker.setCommand(new MoveCommand(selectTool));
+        invoker.executeCommand();
+    
+
     }
 
     @FXML
@@ -235,6 +239,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void deleteaShape(ActionEvent event) {
+        invoker.setCommand(new DeleteCommand(selectTool,DrawingWindow));
+        invoker.executeCommand();
+        selectTool.deSelect();
     }
     
 }
