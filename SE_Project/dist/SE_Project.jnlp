@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="SE_Project.jar" size="12898" download="eager" />
+    <jar href="SE_Project.jar" size="16158" download="eager" />
     <jar href="lib\junit-4.13.2.jar" size="384581" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="se_project.SE_Project"  name="SE_Project" />

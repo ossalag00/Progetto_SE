@@ -147,7 +147,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void clear(ActionEvent event) {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.WARNING,"Sei sicuro di voler proseguire? Tutto il lavoro verrà perso");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get()==ButtonType.OK)
             DrawingWindow.getChildren().clear();
@@ -235,6 +235,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void recolorShape(ActionEvent event) {
+        invoker.setCommand(new RecolorCommand(selectTool ,colorPickerIn.getValue(),colorPickerOut.getValue()));
+        invoker.executeCommand();
     }
 
     @FXML
