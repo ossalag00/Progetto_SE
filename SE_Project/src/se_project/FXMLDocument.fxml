@@ -17,7 +17,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane id="Window" fx:id="Window" alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" text="DRAWING WINDOW" textAlignment="CENTER" textOverrun="CLIP" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se_project.FXMLDocumentController">
+<TitledPane id="Window" fx:id="Window" alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" text="DRAWING WINDOW" textAlignment="CENTER" textOverrun="CLIP" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se_project.FXMLDocumentController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
@@ -68,7 +68,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />                       
                                  </VBox.margin>
                                  <value>
-                                    <Color red="0.0" green="0.0" blue="0.0" />
+                                    <Color blue="0.0" green="0.0" red="0.0" />
                                  </value>
                               </ColorPicker>
                               
@@ -114,6 +114,7 @@
           <MenuItem fx:id="move" mnemonicParsing="false" onAction="#moveShape" text="Move" />
             <MenuItem fx:id="recolor" mnemonicParsing="false" onAction="#recolorShape" text="Recolor" />
             <MenuItem fx:id="delete" mnemonicParsing="false" onAction="#deleteaShape" text="Delete" />
+            <MenuItem fx:id="foreground" mnemonicParsing="false" onAction="#toFrontShape" text="Foreground" />
         </items>
       </ContextMenu>
    </contextMenu>

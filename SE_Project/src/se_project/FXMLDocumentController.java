@@ -83,6 +83,8 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem recolor;
     @FXML
     private MenuItem delete;
+    @FXML
+    private MenuItem foreground;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -245,7 +247,17 @@ public class FXMLDocumentController implements Initializable {
         invoker.executeCommand();
         selectTool.deSelect();
     }
-    
+
+    @FXML
+    private void toFrontShape(ActionEvent event) {
+        if(toolBar.getCurrentState()==selectTool){
+            invoker.setCommand(new ToFrontCommand(selectTool));
+            invoker.executeCommand();
+            selectTool.deSelect();
+        }
+    }
 }
+    
+
     
 
