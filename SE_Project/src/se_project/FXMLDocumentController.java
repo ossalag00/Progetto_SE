@@ -209,6 +209,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void contextMenuShow(ContextMenuEvent event) {
+        if(selectTool.isToggle())
+            event.consume();
     }
 
     @FXML

@@ -8,3 +8,7 @@ SE_Project/build/classes/se_project/FXMLDocument.fxml
 *.html
 *.jar
 *.jnlp
+*.properties
+*.html
+*.jar
+*.jnlp
