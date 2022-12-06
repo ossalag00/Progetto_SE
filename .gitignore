@@ -2,3 +2,9 @@
 /SE_Project/dist/
 *.xml
 *.properties
+SE_Project/build/classes/se_project/FXMLDocument.fxml
+*.properties
+*.class
+*.html
+*.jar
+*.jnlp

@@ -85,6 +85,8 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem delete;
     @FXML
     private MenuItem foreground;
+    @FXML
+    private MenuItem copy;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -255,6 +257,13 @@ public class FXMLDocumentController implements Initializable {
             invoker.executeCommand();
             selectTool.deSelect();
         }
+    }
+
+    @FXML
+    private void copyShape(ActionEvent event) {
+        invoker.setCommand(new CopyCommand(selectTool));
+        invoker.executeCommand();
+        selectTool.deSelect();
     }
 }
     
