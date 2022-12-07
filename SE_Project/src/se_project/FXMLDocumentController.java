@@ -87,35 +87,35 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem foreground;
     @FXML
     private MenuItem copy;
+    @FXML
+    private Button undoBtn;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         shapeText.setEditable(false);
-        
+        recTool.setDrawingWindow(DrawingWindow);
+        ellipseTool.setDrawingWindow(DrawingWindow);
+        lineTool.setDrawingWindow(DrawingWindow);
         
     }    
-    @FXML
-    private void initDraw(MouseEvent event) {
-        if(toolBar.getCurrentState()==null){
-            Alert a = new Alert(Alert.AlertType.WARNING,"You must select a shape");
-            a.show();
+    
+        @FXML
+    private void mousePressed(MouseEvent event) {
+        if(toolBar.getCurrentState()!=null){
+            toolBar.getCurrentState().mouseDown(event);
         }
-        else{
-        toolBar.getCurrentState().setStartX(event.getX());
-        toolBar.getCurrentState().setStartY(event.getY());}
-        }/*Metodo richiamato al click del mouse sull'area di disegno che verifica se
-        sia stata selezionata una figura(State) e, in tal caso, richiama i metodi
-        del Tool selezionato per memorizzare le coordinate iniziali, in caso non sia
-        stata selezionata alcuna figura restituisce un avviso a schermo*/
+    }
+    
     @FXML
-    private void draw(MouseEvent event){
-        toolBar.getCurrentState().setEndX(event.getX());
-        toolBar.getCurrentState().setEndY(event.getY());
-        invoker.setCommand(new DrawCommand(toolBar.getCurrentState(),DrawingWindow));
-        invoker.executeCommand();   
+    private void mouseReleased(MouseEvent event) {
+      if((toolBar.getCurrentState() instanceof DrawingTool)){
+            invoker.setCommand(new DrawCommand(toolBar.getCurrentState(),event));
+            invoker.executeCommand();  
+        }
     }/*Metodo che al rilascio del mouse setta le coordinate di arrivo del tool
     selezionato e tramite l'invoker richiama il comando per disegnare la figura*/
     
+      
     @FXML
     private void setRectangle(ActionEvent event) {
         toolBar.setCurrentState(recTool);
@@ -214,35 +214,16 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void click(MouseEvent event) {
-                if(toolBar.getCurrentState()==selectTool){
-            if(event.getButton().equals(MouseButton.PRIMARY)){
-                if(event.getTarget() instanceof Shape){
-                    invoker.setCommand(new SelectCommand(selectTool,(Shape)event.getTarget()));
-                    invoker.executeCommand();
-                   
-                }
-                else{
-                    if(selectTool.getSelectedShape()!=null){
-                    selectTool.deSelect();
-                    }
-                }
-            }
-        }
-    }
-
-    @FXML
     private void moveShape(ActionEvent event) {
         invoker.setCommand(new MoveCommand(selectTool));
         invoker.executeCommand();
-    
-
     }
 
     @FXML
     private void recolorShape(ActionEvent event) {
         invoker.setCommand(new RecolorCommand(selectTool ,colorPickerIn.getValue(),colorPickerOut.getValue()));
         invoker.executeCommand();
+        selectTool.deSelect();
     }
 
     @FXML
@@ -267,8 +248,9 @@ public class FXMLDocumentController implements Initializable {
         invoker.executeCommand();
         selectTool.deSelect();
     }
+
+    @FXML
+    private void undoAction(ActionEvent event) {
+        invoker.undoLast();
+    }
 }
-    
-
-    
-

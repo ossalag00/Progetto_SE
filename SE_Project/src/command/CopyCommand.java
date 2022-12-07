@@ -29,9 +29,13 @@ public class CopyCommand implements Command{
 
     @Override
     public void execute() {
-            this.clipBoard.setClipBoardTool(this.selectTool.getSelectedShape());
+        this.clipBoard.setClipBoardTool(this.selectTool.getSelectedShape());
     }
     
+    @Override
+    public void undo(){
+        this.clipBoard.setClipBoardTool(null);
+    }
    
     
 }

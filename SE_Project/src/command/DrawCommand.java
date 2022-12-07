@@ -4,29 +4,36 @@
  */
 package command;
 
-import javafx.scene.layout.Pane;
+import Tool.DrawingTool;
 import Tool.Tool;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Shape;
 
 /**
  *
  * @author giorgino
  */
 public class DrawCommand implements Command {
-    private Tool tool;
-    private Pane pane;
-
-    public DrawCommand(Tool tool,Pane pane) {
-        this.tool = tool;
-        this.pane=pane;
+    private DrawingTool tool;
+    private MouseEvent event;
+    private Shape drawnShape;
+    
+    public DrawCommand(Tool tool,MouseEvent event) {
+        this.tool = (DrawingTool)tool;
+        this.event=event;
         
     }
 
     @Override
     public void execute() {
-        this.pane.getChildren().add(this.tool.mouseUp());
+       this.tool.mouseUp(this.event);
+       this.drawnShape=this.tool.getDrawnShape();
     }
 
-   
+     @Override
+    public void undo() {
+        this.tool.erase(this.drawnShape);
+    }
 
     
 }

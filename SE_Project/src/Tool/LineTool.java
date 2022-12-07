@@ -1,18 +1,20 @@
 package Tool;
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
 
-public class LineTool extends Tool {
+
+public class LineTool extends DrawingTool {
     
-    @Override
-    public Shape mouseUp(){       
+     @Override
+    public void mouseUp(MouseEvent event){       
         Line line = new Line();
         line.setStartX(this.getStartX());
         line.setStartY(this.getStartY());
-        line.setEndX(this.getEndX());
-        line.setEndY(this.getEndY());
+        line.setEndX(event.getX());
+        line.setEndY(event.getY());
         line.setStroke(this.getOut());
-        return line;
+        this.getDrawingWindow().getChildren().add(line);
+        this.setDrawnShape(line);
     }
 }

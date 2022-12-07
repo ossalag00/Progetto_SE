@@ -6,10 +6,7 @@ package command;
 
 import java.util.Stack;
 
-/**
- *
- * @author giorgino
- */
+
 public class Invoker {
     private Command command;
     private Stack<Command> listCommand = new Stack<>();
@@ -21,14 +18,21 @@ public class Invoker {
     
     public void executeCommand(){
         this.command.execute();
-        
+        this.push(command);
     }
     
-    public void push(Command command){
+    private void push(Command command){
         listCommand.push(command);
     }
     
-    public Command pop(){
+    private Command pop(){
         return listCommand.pop();
+    }
+    public void undoLast(){
+        if(!listCommand.empty()){
+            Command c=this.pop();
+            c.undo();
+        }
+        
     }
 }

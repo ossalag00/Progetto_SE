@@ -6,12 +6,13 @@ package command;
 
 import Tool.SelectTool;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
 
 
 public class DeleteCommand implements Command {
     private SelectTool tool;
     private Pane pane;
-
+    Shape deletedShape;
 
 
     public DeleteCommand(SelectTool tool,Pane pane) {
@@ -21,10 +22,12 @@ public class DeleteCommand implements Command {
 
     @Override
     public void execute(){
-        if(!tool.isToggle())
-            this.pane.getChildren().remove(this.tool.getSelectedShape());
-        
-        
+        deletedShape=this.tool.getSelectedShape();
+        this.pane.getChildren().remove(deletedShape);
+    }
+    @Override
+    public void undo() {
+        this.pane.getChildren().add(deletedShape);
     }
     
 }

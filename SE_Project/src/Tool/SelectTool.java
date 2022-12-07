@@ -7,6 +7,8 @@ package Tool;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Effect;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
@@ -27,9 +29,20 @@ public class SelectTool extends Tool {
             this.toggle=false;
         }else{
             this.deSelect();
+        }   
+    }
+    
+    public void mouseDown(MouseEvent event){
+        if(event.getButton().equals(MouseButton.PRIMARY)){
+                if(event.getTarget() instanceof Shape){
+                    select((Shape)event.getTarget());
+                }
+        else{
+                if(selectedShape!=null){
+                    deSelect();
+                    }
+            }
         }
-        
-        
     }
 
     public Shape getSelectedShape() {

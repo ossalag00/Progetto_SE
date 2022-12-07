@@ -6,6 +6,7 @@
 package command;
 
 import Tool.*;
+import javafx.scene.shape.Shape;
 
 /**
  *
@@ -13,6 +14,7 @@ import Tool.*;
  */
 public class ToFrontCommand implements Command{
     private SelectTool selectTool;
+    private Shape s;
 
     public ToFrontCommand(SelectTool selectTool) {
         this.selectTool = selectTool;
@@ -20,10 +22,13 @@ public class ToFrontCommand implements Command{
 
     @Override
     public void execute() {
-        if(!this.selectTool.isToggle()){
-            this.selectTool.getSelectedShape().toFront();
-        }
+       this.selectTool.getSelectedShape().toFront();
+       s=this.selectTool.getSelectedShape();
     }
     
+    @Override
+    public void undo() {
+        s.toBack();
+    }
     
 }

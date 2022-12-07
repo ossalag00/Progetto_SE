@@ -17,7 +17,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane id="Window" fx:id="Window" alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" text="DRAWING WINDOW" textAlignment="CENTER" textOverrun="CLIP" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se_project.FXMLDocumentController">
+<TitledPane id="Window" fx:id="Window" alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" text="DRAWING WINDOW" textAlignment="CENTER" textOverrun="CLIP" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se_project.FXMLDocumentController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
@@ -68,7 +68,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />                       
                                  </VBox.margin>
                                  <value>
-                                    <Color red="0.0" green="0.0" blue="0.0" />
+                                    <Color blue="0.0" green="0.0" red="0.0" />
                                  </value>
                               </ColorPicker>
                               
@@ -92,13 +92,18 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </Button>
+                              <Button fx:id="undoBtn" mnemonicParsing="false" onAction="#undoAction" text="Undo">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Button>
                            </children>
                         </VBox>
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="703.0" prefWidth="924.0">
                      <children>
-                        <Pane fx:id="DrawingWindow" layoutX="90.0" layoutY="-1.0" onContextMenuRequested="#contextMenuShow" onMouseClicked="#click" onMousePressed="#initDraw" onMouseReleased="#draw" prefHeight="731.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
+                        <Pane fx:id="DrawingWindow" layoutX="90.0" layoutY="-1.0" onContextMenuRequested="#contextMenuShow" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" prefHeight="731.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
                      </children>
                   </AnchorPane>
               </items>

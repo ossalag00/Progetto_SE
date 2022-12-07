@@ -1,12 +1,12 @@
 package Tool;
 
 import static java.lang.Math.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 
-public class RectangleTool extends Tool {
+public class RectangleTool extends DrawingTool {
     
     private Color in=Color.WHITE;
     
@@ -21,24 +21,25 @@ public class RectangleTool extends Tool {
     
     
     @Override
-    public Shape mouseUp(){
+    public void mouseUp(MouseEvent event){
         Rectangle rect = new Rectangle();
-        if(this.getEndX()<this.getStartX()){
-            rect.setX(this.getEndX());
+        if(event.getX()<this.getStartX()){
+            rect.setX(event.getX());
         }else{
             rect.setX(this.getStartX());
         }
-        if(this.getEndY()<this.getStartY()){
-           rect.setY(this.getEndY());
+        if(event.getY()<this.getStartY()){
+           rect.setY(event.getY());
            
         }else{
             rect.setY(this.getStartY());
         }
-        rect.setWidth(abs((this.getStartX()-this.getEndX())));
-        rect.setHeight(abs((this.getStartY()-this.getEndY())));
+        rect.setWidth(abs((this.getStartX()-event.getX())));
+        rect.setHeight(abs((this.getStartY()-event.getY())));
         rect.setFill(this.in);
         rect.setStroke(this.getOut());
-        return rect;
+        this.getDrawingWindow().getChildren().add(rect);
+        this.setDrawnShape(rect);
     } /*Sovrascriviamo il metodo della classe astratta estesa così da ottenere 
     al rilascio del mouse un nuovo rettangolo le cui dimensioni e posizione
     dipendono da coordinate iniziali e finali*/
