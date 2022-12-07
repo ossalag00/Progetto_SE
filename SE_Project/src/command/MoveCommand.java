@@ -10,7 +10,7 @@ import javafx.scene.shape.Shape;
 
 public class MoveCommand implements Command {
      private SelectTool tool;
-    private double startX,startY;
+    private double startX,startY,undoX,undoY;
     private Shape selected;
     
     
@@ -26,6 +26,8 @@ public class MoveCommand implements Command {
             this.selected.setOnMousePressed( e-> {
                 startX = this.selected.getLayoutX() - e.getX();
                 startY = this.selected.getLayoutY() - e.getY();
+                undoX=this.selected.getTranslateX();
+                undoY=this.selected.getTranslateY();
         });
             this.selected.setOnMouseDragged(e-> {
                 this.selected.setTranslateX(this.selected.getTranslateX()+e.getX()+startX);
@@ -33,6 +35,8 @@ public class MoveCommand implements Command {
         });
             this.selected.setOnMouseReleased(e->{
                 this.selected.setCursor(Cursor.DEFAULT);
+                undoX=this.selected.getTranslateX()-undoX;
+                undoY=this.selected.getTranslateY()-undoY;
                 this.selected.setOnMousePressed(event->{
                     
                 });
@@ -45,7 +49,8 @@ public class MoveCommand implements Command {
 
     @Override
     public void undo() {
-        
+        this.selected.setTranslateX(selected.getTranslateX()-undoX);
+        this.selected.setTranslateY(selected.getTranslateY()-undoY);
     }
     
    
