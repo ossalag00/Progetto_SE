@@ -1,7 +1,6 @@
 
 import Tool.SelectTool;
 import command.DeleteCommand;
-import command.SelectCommand;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -12,8 +11,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
- class TestDelete {
-      private Pane drawingPane;
+public class TestDelete {
+    private Pane drawingPane;
     private SelectTool tool;
     private Shape lineToDelete;
     private Shape rectangle;
@@ -35,9 +34,7 @@ import org.junit.Test;
     @Test
     public void testDelete(){
         DeleteCommand instance;
-        SelectCommand select;
-        select=new SelectCommand(tool,lineToDelete);
-        select.execute();
+        this.tool.select(this.lineToDelete);
         instance = new DeleteCommand(tool, drawingPane);
         instance.execute();
         assertFalse(drawingPane.getChildren().contains(lineToDelete));

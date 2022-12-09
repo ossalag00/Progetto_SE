@@ -1,61 +1,67 @@
-import Tool.LineTool;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import Tool.EllipseTool;
-import Tool.RectangleTool;
+import Tool.*;
+import command.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 public class TestTool {
     Shape line, rect, elli;
     Pane root;
-    LineTool tooline;
-    RectangleTool toolret;
-    EllipseTool toolelli;
-    DrawCommandForTest command;
+    DrawingTool lineTool,rectTool,ellipseTool;
     
    @Before
     public void setup() {
-
         root = new Pane();
-        tooline = new LineTool();
-        tooline.setStartX(3);
-        tooline.setStartY(5);
-        tooline.setEndX(7);
-        tooline.setEndY(1);
-        command=new DrawCommandForTest(tooline,root);
-        line=command.execute();
-        toolret = new RectangleTool();
-        toolret.setStartX(5);
-        toolret.setStartY(6);
-        toolret.setEndX(2.5);
-        toolret.setEndY(2);
-        command = new DrawCommandForTest(toolret,root);
-        rect = command.execute();
+        //tool= new LineTool();
+        lineTool=new LineTool();
+        lineTool.setDrawingWindow(root);
+        MouseEvent press = new MouseEvent(MouseEvent.MOUSE_PRESSED, 3,4,6,9,MouseButton.PRIMARY,1,false,false,false,false,false,false,false,false,false,false,null);
+        lineTool.mouseDown(press);
+        MouseEvent release = new MouseEvent(MouseEvent.MOUSE_RELEASED, 13,14,16,19,MouseButton.PRIMARY,0,false,false,false,false,false,false,false,false,false,false,null);
+        DrawCommand command=new DrawCommand(lineTool,release);
+        command.execute();
+        rectTool=new RectangleTool();
+        rectTool.setDrawingWindow(root);
+        MouseEvent press2 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 7,8,10,13,MouseButton.PRIMARY,1,false,false,false,false,false,false,false,false,false,false,null);
+        rectTool.mouseDown(press2);
+        MouseEvent release2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 12,13,15,18,MouseButton.PRIMARY,0,false,false,false,false,false,false,false,false,false,false,null);
+        DrawCommand command2=new DrawCommand(rectTool,release2);
+        command2.execute();
+        ellipseTool= new EllipseTool();
+        ellipseTool.setDrawingWindow(root);
+        MouseEvent press3 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 3,4,6,9,MouseButton.PRIMARY,1,false,false,false,false,false,false,false,false,false,false,null);
+        ellipseTool.mouseDown(press3);
+        MouseEvent release3 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 13,14,16,19,MouseButton.PRIMARY,0,false,false,false,false,false,false,false,false,false,false,null);
+        DrawCommand command3=new DrawCommand(ellipseTool,release3);
+        command3.execute();
+        
     }
 
     @Test
     public void testShapeInsertion() {
       
-        assert(root.getChildren().contains(line));
-        
-        assert(root.getChildren().contains(rect));
-
+        assert(root.getChildren().contains(lineTool.getDrawnShape()));
+        assert(root.getChildren().contains(rectTool.getDrawnShape()));
+        assert(root.getChildren().contains(ellipseTool.getDrawnShape()));
     }
     
     @Test
     public void testShapeDimension() {
 
-      assertEquals(tooline.getStartX(),3,0);
-      assertEquals(tooline.getStartY(),5,0);
-      assertEquals(tooline.getEndX(),7,0);
-      assertEquals(tooline.getEndY(),1,0);
+      assertEquals(lineTool.getStartX(),3,0);
+      assertEquals(lineTool.getStartY(),4,0);
+      assert(lineTool.getDrawnShape().contains(13, 14));
       
-      assertEquals(toolret.getStartX(), 5,0);
-      assertEquals(toolret.getStartY(), 6,0);
-      assertEquals(toolret.getEndX(), 2.5,0);
-      assertEquals(toolret.getEndY(), 2 ,0);
-
+      assertEquals(rectTool.getStartX(), 7,0);
+      assertEquals(rectTool.getStartY(), 8,0);
+      assert(rectTool.getDrawnShape().contains(12, 13));
+      
+       assertEquals(ellipseTool.getStartX(), 3,0);
+      assertEquals(ellipseTool.getStartY(), 4,0);
+      assert(ellipseTool.getDrawnShape().contains(13, 4));//13,4 è l'estremo destro dell'asse maggiore dell'ellisse
     }
 }

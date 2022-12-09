@@ -5,7 +5,6 @@
  */
 
 import Tool.SelectTool;
-import command.SelectCommand;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
@@ -37,9 +36,7 @@ public class TestSelect {
     
     @Test
     public void testSelect(){
-        SelectCommand select;
-        select = new SelectCommand(tool,shape1);
-        select.execute();
+        this.tool.select(shape1);
         Shape s = tool.getSelectedShape();
         assertEquals(s,shape1);
         assertTrue(!tool.isToggle());

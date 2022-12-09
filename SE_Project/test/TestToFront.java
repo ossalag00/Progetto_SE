@@ -5,7 +5,6 @@
  */
 
 import Tool.SelectTool;
-import command.SelectCommand;
 import command.ToFrontCommand;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -27,7 +26,7 @@ public class TestToFront {
     Pane pane;
     ToFrontCommand toFrontCommand;
     SelectTool selectTool;
-    SelectCommand select;
+    
     
     public TestToFront() {
     }
@@ -41,13 +40,13 @@ public class TestToFront {
         selectTool=new SelectTool();
         pane.getChildren().add(s1);
         pane.getChildren().add(s2);
-        select = new SelectCommand(selectTool,s1);
+        this.selectTool.select(s1);
         toFrontCommand=new ToFrontCommand(selectTool);
     }
     
     @Test
     public void testFront(){
-        select.execute();
+        
         toFrontCommand.execute();
         assertEquals(1,pane.getChildren().indexOf(s1));
         assertEquals(0,pane.getChildren().indexOf(s2));

@@ -1,7 +1,6 @@
 
 import Tool.SelectTool;
 import command.RecolorCommand;
-import command.SelectCommand;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -26,9 +25,7 @@ public class TestRecolor {
     
     @Test
     public void testRecolor() {
-        SelectCommand select;
-        select = new SelectCommand(tool,rectangle);
-        select.execute();
+        this.tool.select(rectangle);
         recolorCommand.execute();
         assertEquals(rectangle.getFill(),Color.AQUA);
         assertEquals(rectangle.getStroke(),Color.BROWN);

@@ -5,14 +5,9 @@
 
 import Tool.ClipBoardTool;
 import Tool.SelectTool;
-import command.CopyCommand;
-import command.SelectCommand;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -34,8 +29,7 @@ public class TestCopy {
     }
     @Test
     public void testCopy(){
-        SelectCommand select=new SelectCommand(this.selectTool,this.shapeToCopy);
-        select.execute();
+        this.selectTool.select(this.shapeToCopy);
         CopyCommandForTest copyCommand=new CopyCommandForTest(this.selectTool);
         this.copy=copyCommand.execute();
         assertEquals(this.copy.getLayoutX(),this.selectTool.getSelectedShape().getLayoutX(),0.1);
