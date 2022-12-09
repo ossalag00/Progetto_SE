@@ -60,13 +60,6 @@ public class FXMLDocumentController implements Initializable {
     private Button clear;
     @FXML
     private Pane DrawingWindow;
-    
-    ToolBar toolBar=new ToolBar();
-    RectangleTool recTool=new RectangleTool();
-    EllipseTool ellipseTool=new EllipseTool();
-    LineTool lineTool=new LineTool();
-    Invoker invoker= new Invoker();
-    SelectTool selectTool= new SelectTool();
     @FXML
     private MenuItem saveBtn;
     @FXML
@@ -88,23 +81,59 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private MenuItem copy;
     @FXML
-    private Button undoBtn;
+    private Button undoButton;
+    @FXML
+    private MenuItem cut;
+    @FXML
+    private MenuItem paste;
+    
+    
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         shapeText.setEditable(false);
         recTool.setDrawingWindow(DrawingWindow);
         ellipseTool.setDrawingWindow(DrawingWindow);
         lineTool.setDrawingWindow(DrawingWindow);
-        
+        paste.setDisable(true);
+        move.setDisable(true);
+        recolor.setDisable(true);
+        delete.setDisable(true);
+        foreground.setDisable(true);
+        copy.setDisable(true);
+        cut.setDisable(true);
     }    
     
         @FXML
     private void mousePressed(MouseEvent event) {
         if(toolBar.getCurrentState()!=null){
             toolBar.getCurrentState().mouseDown(event);
+            if(selectTool.getSelectedShape()!=null){
+                move.setDisable(false);
+                recolor.setDisable(false);
+                delete.setDisable(false);
+                foreground.setDisable(false);
+                copy.setDisable(false);
+                cut.setDisable(false);
+            }else{
+                move.setDisable(true);
+                recolor.setDisable(true);
+                delete.setDisable(true);
+                foreground.setDisable(true);
+                copy.setDisable(true);
+                cut.setDisable(true);
+            }
         }
     }
+    
+    ToolBar toolBar=new ToolBar();
+    RectangleTool recTool=new RectangleTool();
+    EllipseTool ellipseTool=new EllipseTool();
+    LineTool lineTool=new LineTool();
+    Invoker invoker= new Invoker();
+    SelectTool selectTool= new SelectTool();
     
     @FXML
     private void mouseReleased(MouseEvent event) {
@@ -206,13 +235,7 @@ public class FXMLDocumentController implements Initializable {
         shapeText.setText("Select");
         
     }
-
-    @FXML
-    private void contextMenuShow(ContextMenuEvent event) {
-        if(selectTool.isToggle())
-            event.consume();
-    }
-
+    
     @FXML
     private void moveShape(ActionEvent event) {
         invoker.setCommand(new MoveCommand(selectTool));
@@ -235,11 +258,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void toFrontShape(ActionEvent event) {
-        if(toolBar.getCurrentState()==selectTool){
             invoker.setCommand(new ToFrontCommand(selectTool));
             invoker.executeCommand();
             selectTool.deSelect();
-        }
     }
 
     @FXML
@@ -247,10 +268,25 @@ public class FXMLDocumentController implements Initializable {
         invoker.setCommand(new CopyCommand(selectTool));
         invoker.executeCommand();
         selectTool.deSelect();
+        paste.setDisable(false);
     }
 
     @FXML
     private void undoAction(ActionEvent event) {
         invoker.undoLast();
+    }
+
+    @FXML
+    private void pasteShape(ActionEvent event) {
+        invoker.setCommand(new PasteCommand(selectTool,DrawingWindow));
+        invoker.executeCommand();
+        paste.setDisable(true);
+    }
+
+    @FXML
+    private void cutShape(ActionEvent event) {
+        invoker.setCommand(new CutCommand(selectTool,DrawingWindow));
+        invoker.executeCommand();
+        paste.setDisable(false);
     }
 }

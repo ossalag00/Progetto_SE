@@ -22,7 +22,7 @@ public class MoveCommand implements Command {
     
     @Override
     public void execute() {
-            this.selected.setCursor(Cursor.MOVE);
+            this.selected.getScene().setCursor(Cursor.MOVE);
             this.selected.setOnMousePressed( e-> {
                 startX = this.selected.getLayoutX() - e.getX();
                 startY = this.selected.getLayoutY() - e.getY();
@@ -34,7 +34,7 @@ public class MoveCommand implements Command {
                 this.selected.setTranslateY(this.selected.getTranslateY()+e.getY()+startY);
         });
             this.selected.setOnMouseReleased(e->{
-                this.selected.setCursor(Cursor.DEFAULT);
+                this.selected.getScene().setCursor(Cursor.DEFAULT);
                 undoX=this.selected.getTranslateX()-undoX;
                 undoY=this.selected.getTranslateY()-undoY;
                 this.selected.setOnMousePressed(event->{
