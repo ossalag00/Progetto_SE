@@ -89,6 +89,8 @@ public class FXMLDocumentController implements Initializable {
     private TextField height;
     @FXML
     private MenuItem resize;
+    @FXML
+    private MenuItem background;
     
     
     
@@ -301,5 +303,12 @@ public class FXMLDocumentController implements Initializable {
         invoker.executeCommand();
         width.setText("");
         height.setText("");
+    }
+
+    @FXML
+    private void toBackShape(ActionEvent event) {
+        invoker.setCommand(new ToBackCommand(selectTool));
+        invoker.executeCommand();
+        selectTool.deSelect();
     }
 }

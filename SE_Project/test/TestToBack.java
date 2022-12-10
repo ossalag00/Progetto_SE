@@ -5,11 +5,11 @@
  */
 
 import Tool.SelectTool;
-import command.ToFrontCommand;
+import command.ToBackCommand;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.*;
+import javafx.scene.shape.Shape;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,14 +21,15 @@ import static org.junit.Assert.*;
  *
  * @author ciroc
  */
-public class TestToFront {
+public class TestToBack {
+    
     Shape s1,s2;
     Pane pane;
-    ToFrontCommand toFrontCommand;
+    ToBackCommand toBackCommand;
     SelectTool selectTool;
     
     
-    public TestToFront() {
+    public TestToBack() {
     }
 
     
@@ -40,17 +41,15 @@ public class TestToFront {
         selectTool=new SelectTool();
         pane.getChildren().add(s1);
         pane.getChildren().add(s2);
-        this.selectTool.setSelectedShape(s1);
-        toFrontCommand=new ToFrontCommand(selectTool);
+        this.selectTool.setSelectedShape(s2);
+        toBackCommand=new ToBackCommand(selectTool);
     }
     
     @Test
-    public void testFront(){
+    public void testBack(){
         
-        toFrontCommand.execute();
+        toBackCommand.execute();
         assertEquals(1,pane.getChildren().indexOf(s1));
         assertEquals(0,pane.getChildren().indexOf(s2));
     }
-
-
 }

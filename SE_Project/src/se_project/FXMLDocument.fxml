@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TitledPane id="Window" fx:id="Window" alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" text="DRAWING WINDOW" textAlignment="CENTER" textOverrun="CLIP" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se_project.FXMLDocumentController">
+<TitledPane id="Window" fx:id="Window" alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" text="DRAWING WINDOW" textAlignment="CENTER" textOverrun="CLIP" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se_project.FXMLDocumentController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
@@ -69,7 +69,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />                       
                                  </VBox.margin>
                                  <value>
-                                    <Color red="0.0" green="0.0" blue="0.0" />
+                                    <Color blue="0.0" green="0.0" red="0.0" />
                                  </value>
                               </ColorPicker>
                               
@@ -129,6 +129,7 @@
             <MenuItem fx:id="cut" mnemonicParsing="false" onAction="#cutShape" text="Cut" />
             <MenuItem fx:id="paste" mnemonicParsing="false" onAction="#pasteShape" text="Paste" />
             <MenuItem fx:id="resize" mnemonicParsing="false" onAction="#resizeShape" text="Resize" />
+            <MenuItem fx:id="background" mnemonicParsing="false" onAction="#toBackShape" text="Background" />
         </items>
       </ContextMenu>
    </contextMenu>
