@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <TitledPane id="Window" fx:id="Window" alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" text="DRAWING WINDOW" textAlignment="CENTER" textOverrun="CLIP" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se_project.FXMLDocumentController">
   <content>
@@ -97,6 +98,10 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </Button>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Width" />
+                              <TextField fx:id="width" prefHeight="18.0" prefWidth="90.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Height" />
+                              <TextField fx:id="height" />
                            </children>
                         </VBox>
                      </children>
@@ -123,6 +128,7 @@
             <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#copyShape" text="Copy" />
             <MenuItem fx:id="cut" mnemonicParsing="false" onAction="#cutShape" text="Cut" />
             <MenuItem fx:id="paste" mnemonicParsing="false" onAction="#pasteShape" text="Paste" />
+            <MenuItem fx:id="resize" mnemonicParsing="false" onAction="#resizeShape" text="Resize" />
         </items>
       </ContextMenu>
    </contextMenu>

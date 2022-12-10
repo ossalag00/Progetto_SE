@@ -4,6 +4,7 @@
  */
 package Tool;
 
+import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Effect;
@@ -19,7 +20,13 @@ import javafx.scene.shape.Shape;
 public class SelectTool extends Tool {
     private Shape selectedShape;
     private boolean toggle=true;
+    private TextField width;
+    private TextField height;
     
+    public void setTextField(TextField width, TextField height){
+        this.width=width;
+        this.height=height;
+    }
     
     public void select(Shape s){
         if(toggle){
@@ -27,6 +34,8 @@ public class SelectTool extends Tool {
             Effect effect = new DropShadow(BlurType.GAUSSIAN, Color.RED, 5, 0.75, 0, 0);
             this.selectedShape.setEffect(effect);
             this.toggle=false;
+            this.width.setText(String.valueOf(this.getWidth()));
+            this.height.setText(String.valueOf(this.getHeight()));
         }else{
             this.deSelect();
         }   
@@ -49,6 +58,14 @@ public class SelectTool extends Tool {
         return selectedShape;
     }
 
+    public double getWidth() {
+        return this.selectedShape.getLayoutBounds().getWidth()*this.selectedShape.getScaleX();
+    }
+
+    public double getHeight() {
+        return this.selectedShape.getLayoutBounds().getHeight()*this.selectedShape.getScaleY();
+    }
+    
     public void setSelectedShape(Shape selectedShape) {
         this.selectedShape = selectedShape;
     }
@@ -57,6 +74,8 @@ public class SelectTool extends Tool {
         this.selectedShape.setEffect(null);
         this.toggle=true;
         this.selectedShape=null;
+        width.setText("");
+        height.setText("");
     }
 
     public boolean isToggle() {

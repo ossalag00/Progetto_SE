@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
- */
+
 package se_project;
 
 import Tool.*;
@@ -86,6 +83,12 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem cut;
     @FXML
     private MenuItem paste;
+    @FXML
+    private TextField width;
+    @FXML
+    private TextField height;
+    @FXML
+    private MenuItem resize;
     
     
     
@@ -104,6 +107,7 @@ public class FXMLDocumentController implements Initializable {
         foreground.setDisable(true);
         copy.setDisable(true);
         cut.setDisable(true);
+        selectTool.setTextField(width, height);
     }    
     
         @FXML
@@ -126,6 +130,7 @@ public class FXMLDocumentController implements Initializable {
                 cut.setDisable(true);
             }
         }
+
     }
     
     ToolBar toolBar=new ToolBar();
@@ -288,5 +293,13 @@ public class FXMLDocumentController implements Initializable {
         invoker.setCommand(new CutCommand(selectTool,DrawingWindow));
         invoker.executeCommand();
         paste.setDisable(false);
+    }
+    
+    @FXML
+    private void resizeShape(ActionEvent event) {
+        invoker.setCommand(new ResizeCommand(selectTool, Double.valueOf(width.getText()),Double.valueOf(height.getText())));
+        invoker.executeCommand();
+        width.setText("");
+        height.setText("");
     }
 }
