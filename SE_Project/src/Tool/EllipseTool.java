@@ -29,6 +29,7 @@ public class EllipseTool extends DrawingTool{
         ellipse.setFill(this.in);
         ellipse.setStroke(this.getOut());
         this.getDrawingWindow().getChildren().add(ellipse);
+        if(this.getScrollPane()!=null){//If inutile ai fini dell'applicazione ma necessario pee il funzionamento del testTool
          if(ellipse.getBoundsInParent().getMaxX()>this.getDrawingWindow().getWidth()){
             this.getDrawingWindow().setPrefSize(ellipse.getBoundsInParent().getMaxX()+100,this.getDrawingWindow().getHeight());
             this.getScrollPane().layout();
@@ -38,6 +39,7 @@ public class EllipseTool extends DrawingTool{
             this.getDrawingWindow().setPrefSize(this.getDrawingWindow().getPrefWidth(),ellipse.getBoundsInParent().getMaxY()+100);
             this.getScrollPane().layout();
             this.getScrollPane().setVvalue(1);
+        }
         }
         this.setDrawnShape(ellipse);
         

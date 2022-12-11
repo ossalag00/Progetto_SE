@@ -39,6 +39,7 @@ public class RectangleTool extends DrawingTool {
         rect.setFill(this.in);
         rect.setStroke(this.getOut());
         this.getDrawingWindow().getChildren().add(rect);
+        if(this.getScrollPane()!=null){//If inutile ai fini dell'applicazione ma necessario pee il funzionamento del testTool
           if(rect.getBoundsInParent().getMaxX()>this.getDrawingWindow().getWidth()){
             this.getDrawingWindow().setPrefWidth(rect.getBoundsInParent().getMaxX()+100);
             this.getScrollPane().layout();
@@ -48,7 +49,8 @@ public class RectangleTool extends DrawingTool {
             this.getDrawingWindow().setPrefHeight(rect.getBoundsInParent().getMaxY()+100);
             this.getScrollPane().layout();
             this.getScrollPane().setVvalue(1);
-        }   
+        }
+        }
         this.setDrawnShape(rect);
     } /*Sovrascriviamo il metodo della classe astratta estesa così da ottenere 
     al rilascio del mouse un nuovo rettangolo le cui dimensioni e posizione

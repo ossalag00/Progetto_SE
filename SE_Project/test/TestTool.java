@@ -16,12 +16,15 @@ public class TestTool {
     private DrawingTool lineTool,rectTool,ellipseTool;
     private DrawCommand command,command2,command3;
 
-    
+
+
    @Before
     public void setup() {
-        this.root = new Pane();
-        this.lineTool=new LineTool();
-        this.lineTool.setDrawingWindow(this.root);
+        root = new Pane();
+        root.setPrefSize(1200,1200);
+        lineTool=new LineTool();
+        lineTool.setDrawingWindow(root);
+
         MouseEvent press = new MouseEvent(MouseEvent.MOUSE_PRESSED, 3,4,6,9,MouseButton.PRIMARY,1,false,false,false,false,false,false,false,false,false,false,null);
         this.lineTool.mouseDown(press);
         MouseEvent release = new MouseEvent(MouseEvent.MOUSE_RELEASED, 13,14,16,19,MouseButton.PRIMARY,0,false,false,false,false,false,false,false,false,false,false,null);

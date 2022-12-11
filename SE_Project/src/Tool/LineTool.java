@@ -15,6 +15,7 @@ public class LineTool extends DrawingTool {
         line.setEndY(event.getY());
         line.setStroke(this.getOut());
         this.getDrawingWindow().getChildren().add(line);
+        if(this.getScrollPane()!=null){//If inutile ai fini dell'applicazione ma necessario pee il funzionamento del testTool
          if(line.getBoundsInParent().getMaxX()>this.getDrawingWindow().getWidth()){
             this.getDrawingWindow().setPrefSize(line.getBoundsInParent().getMaxX()+100,this.getDrawingWindow().getHeight());
             this.getScrollPane().layout();
@@ -24,6 +25,7 @@ public class LineTool extends DrawingTool {
             this.getDrawingWindow().setPrefSize(this.getDrawingWindow().getPrefWidth(),line.getBoundsInParent().getMaxY()+100);
             this.getScrollPane().layout();
             this.getScrollPane().setVvalue(1);
+        }
         }
         this.setDrawnShape(line);
     }
