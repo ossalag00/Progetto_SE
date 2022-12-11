@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package command;
 
 import Tool.SelectTool;
@@ -9,7 +6,7 @@ import javafx.scene.Cursor;
 import javafx.scene.shape.Shape;
 
 public class MoveCommand implements Command {
-     private SelectTool tool;
+    private SelectTool tool;
     private double startX,startY,undoX,undoY;
     private Shape selected;
     
@@ -22,29 +19,30 @@ public class MoveCommand implements Command {
     
     @Override
     public void execute() {
-            this.selected.getScene().setCursor(Cursor.MOVE);
-            this.selected.setOnMousePressed( e-> {
-                startX = this.selected.getLayoutX() - e.getX();
-                startY = this.selected.getLayoutY() - e.getY();
-                undoX=this.selected.getTranslateX();
-                undoY=this.selected.getTranslateY();
+        this.selected.getScene().setCursor(Cursor.MOVE);
+        this.selected.setOnMousePressed( e-> {
+            this.startX =  e.getSceneX();
+            this.startY = e.getSceneY();
+            this.undoX=this.selected.getTranslateX();
+            this.undoY=this.selected.getTranslateY();
         });
-            this.selected.setOnMouseDragged(e-> {
-                this.selected.setTranslateX(this.selected.getTranslateX()+e.getX()+startX);
-                this.selected.setTranslateY(this.selected.getTranslateY()+e.getY()+startY);
+        this.selected.setOnMouseDragged(e-> {
+            this.selected.setTranslateX(this.selected.getTranslateX()+e.getSceneX()-startX);
+            this.selected.setTranslateY(this.selected.getTranslateY()+e.getSceneY()-startY);
+            this.startX= e.getSceneX();
+            this.startY=e.getSceneY();
         });
-            this.selected.setOnMouseReleased(e->{
-                this.selected.getScene().setCursor(Cursor.DEFAULT);
-                undoX=this.selected.getTranslateX()-undoX;
-                undoY=this.selected.getTranslateY()-undoY;
-                this.selected.setOnMousePressed(event->{
-                    
-                });
-                this.selected.setOnMouseDragged(value ->{
-                    
-                });
+        this.selected.setOnMouseReleased(e->{
+            this.selected.getScene().setCursor(Cursor.DEFAULT);
+            this.undoX=this.selected.getTranslateX()-undoX;
+            this.undoY=this.selected.getTranslateY()-undoY;
+            this.selected.setOnMousePressed(event->{
+                
             });
-        
+            this.selected.setOnMouseDragged(value ->{
+                
+            });
+        });
     }
 
     @Override

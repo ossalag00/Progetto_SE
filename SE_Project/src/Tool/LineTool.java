@@ -6,7 +6,7 @@ import javafx.scene.shape.Line;
 
 public class LineTool extends DrawingTool {
     
-     @Override
+    @Override
     public void mouseUp(MouseEvent event){       
         Line line = new Line();
         line.setStartX(this.getStartX());

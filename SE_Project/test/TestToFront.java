@@ -17,24 +17,24 @@ public class TestToFront {
       
     @Before
     public void setUp() {
-        pane=new Pane();
-        s1=new Line();
-        s2=new Rectangle();
-        selectTool=new SelectToolForTest();
-        pane.getChildren().add(s1);
-        pane.getChildren().add(s2);
-        this.selectTool.setSelectedShape(s1);
-        toFrontCommand=new ToFrontCommand(selectTool);
+        this.pane=new Pane();
+        this.s1=new Line();
+        this.s2=new Rectangle();
+        this.selectTool=new SelectToolForTest();
+        this.pane.getChildren().add(this.s1);
+        this.pane.getChildren().add(this.s2);
+        this.selectTool.setSelectedShape(this.s1);
+        this.toFrontCommand=new ToFrontCommand(this.selectTool);
     }
     
     @Test
     public void testFront(){
-        toFrontCommand.execute();
-        assertEquals(1,pane.getChildren().indexOf(s1));
-        assertEquals(0,pane.getChildren().indexOf(s2));
-        toFrontCommand.undo();
-        assertEquals(1,pane.getChildren().indexOf(s2));
-        assertEquals(0,pane.getChildren().indexOf(s1));
+        this.toFrontCommand.execute();
+        assertEquals(1,this.pane.getChildren().indexOf(this.s1));
+        assertEquals(0,this.pane.getChildren().indexOf(this.s2));
+        this.toFrontCommand.undo();
+        assertEquals(1,this.pane.getChildren().indexOf(this.s2));
+        assertEquals(0,this.pane.getChildren().indexOf(this.s1));
         
     }
 

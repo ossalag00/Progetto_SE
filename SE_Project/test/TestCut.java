@@ -35,7 +35,7 @@ public class TestCut {
 
         @Test
     public void testCut(){
-        selectTool.select(shapeToCopy);
+        this.selectTool.select(this.shapeToCopy);
         CutCommand cutCommand=new CutCommand(this.selectTool,this.pane);
         cutCommand.execute();
         this.copy=this.clipBoard.getClipBoardTool();
@@ -44,9 +44,9 @@ public class TestCut {
         assertEquals(this.copy.getFill(),this.shapeToCopy.getFill());
         assertEquals(this.copy.getStroke(),this.shapeToCopy.getStroke());
         assertFalse(this.pane.getChildren().contains(this.shapeToCopy));
-        selectTool.deSelect();
+        this.selectTool.deSelect();
         cutCommand.undo();
         assertEquals(this.clipBoard.getClipBoardTool(),null);    
-        assertTrue(this.pane.getChildren().contains(shapeToCopy));
+        assertTrue(this.pane.getChildren().contains(this.shapeToCopy));
     }
 }

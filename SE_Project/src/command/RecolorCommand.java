@@ -15,7 +15,6 @@ public class RecolorCommand implements Command{
         this.selectTool=SelectTool;
         this.in = in;
         this.out = out;
-
     }
 
 

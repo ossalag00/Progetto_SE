@@ -204,6 +204,8 @@ public class FXMLDocumentController implements Initializable {
    
     @FXML
     private void save(ActionEvent event){
+        if(!selectTool.isToggle())
+            selectTool.deSelect();
         FileChooser fileChooser = new FileChooser();
  
         //Set extension filter for text files
@@ -266,7 +268,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void deleteaShape(ActionEvent event) {
+    private void deleteShape(ActionEvent event) {
         invoker.setCommand(new DeleteCommand(selectTool,DrawingWindow));
         invoker.executeCommand();
         selectTool.deSelect();

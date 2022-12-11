@@ -22,7 +22,7 @@ public class TestResize {
         this.rectangle = new Rectangle(10,20,200,300);
         this.pane.getChildren().add(this.rectangle);
         this.selectTool= new SelectToolForTest();
-        selectTool.select(rectangle);
+        this.selectTool.select(rectangle);
         this.newWidth = 600;
         this.newHeight = 400;
         this.resizeCommand = new ResizeCommand(this.selectTool, this.newWidth, this.newHeight);
@@ -33,10 +33,10 @@ public class TestResize {
     public void testResize(){
         assert(this.rectangle.getScaleX()==1);
         assert(this.rectangle.getScaleY()==1);
-        resizeCommand.execute();
+        this.resizeCommand.execute();
         assert(this.rectangle.getLayoutBounds().getWidth()*this.rectangle.getScaleX()==this.newWidth);
         assert(this.rectangle.getLayoutBounds().getHeight()*this.rectangle.getScaleY()==this.newHeight);
-        resizeCommand.undo();
+        this.resizeCommand.undo();
         assert(this.rectangle.getLayoutBounds().getWidth()*this.rectangle.getScaleX()==200);
         assert(this.rectangle.getLayoutBounds().getHeight()*this.rectangle.getScaleY()==300);
     }

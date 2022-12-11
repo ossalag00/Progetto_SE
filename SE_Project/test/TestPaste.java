@@ -21,26 +21,26 @@ import static org.junit.Assert.*;
     
     @Before
     public void setUp() {
-        selectTool=new SelectToolForTest();
-        pane=new Pane();
-        toPaste = new Rectangle(10,10,20,20);
-        clipBoard = ClipBoardTool.getInstance(this.selectTool);
-        selectTool.select(toPaste);
-        clipBoard.setClipBoardTool(toPaste);
+        this.selectTool=new SelectToolForTest();
+        this.pane=new Pane();
+        this.toPaste = new Rectangle(10,10,20,20);
+        this.clipBoard = ClipBoardTool.getInstance(this.selectTool);
+        this.selectTool.select(this.toPaste);
+        this.clipBoard.setClipBoardTool(this.toPaste);
     }
     
     @Test
     public void testPaste(){
         
-        PasteCommandForTest command = new PasteCommandForTest(selectTool,pane);
-        pasted = command.execute();
-        assert(pane.getChildren().contains(pasted));
-        assertEquals(pasted.getLayoutX(),toPaste.getLayoutX(),0.1);
-        assertEquals(pasted.getLayoutY(),toPaste.getLayoutY(),0.1);
-        assertEquals(pasted.getFill(),toPaste.getFill());
-        assertEquals(pasted.getStroke(),toPaste.getStroke());
+        PasteCommandForTest command = new PasteCommandForTest(this.selectTool,pane);
+        this.pasted = command.execute();
+        assert(pane.getChildren().contains(this.pasted));
+        assertEquals(this.pasted.getLayoutX(),this.toPaste.getLayoutX(),0.1);
+        assertEquals(this.pasted.getLayoutY(),this.toPaste.getLayoutY(),0.1);
+        assertEquals(this.pasted.getFill(),this.toPaste.getFill());
+        assertEquals(this.pasted.getStroke(),this.toPaste.getStroke());
         command.undo();
-        assertFalse(pane.getChildren().contains(pasted));
+        assertFalse(this.pane.getChildren().contains(this.pasted));
     }
     
     

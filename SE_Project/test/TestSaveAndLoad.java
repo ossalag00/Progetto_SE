@@ -18,12 +18,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import se_project.FXMLDocumentController;
 
 /**
@@ -33,29 +29,14 @@ import se_project.FXMLDocumentController;
 public class TestSaveAndLoad {
     private Pane pane;
     private Shape s;
-    
-    public TestSaveAndLoad() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+        
     @Before
     public void setUp() {
         this.pane=new Pane();
         this.s=new Rectangle(10,20,30,40);
-        pane.getChildren().add(s);
+        this.pane.getChildren().add(s);
     }
     
-    @After
-    public void tearDown() {
-    }
     @Test
     public void saveAndLoad(){
     XMLEncoder encoder;
@@ -63,7 +44,7 @@ public class TestSaveAndLoad {
             encoder = new XMLEncoder(new FileOutputStream(new File("test.xml")));
             encoder.setPersistenceDelegate(Color.class,new DefaultPersistenceDelegate(
                     new String[]{"red", "green", "blue","opacity"}));
-            encoder.writeObject(pane.getChildren().toArray(new Node[0]));
+            encoder.writeObject(this.pane.getChildren().toArray(new Node[0]));
             encoder.close();
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,14 +53,14 @@ public class TestSaveAndLoad {
         XMLDecoder decoder;
         try {
             decoder = new XMLDecoder(new FileInputStream(new File("test.xml")));
-            pane.getChildren().setAll((Node[]) decoder.readObject());
+            this.pane.getChildren().setAll((Node[]) decoder.readObject());
             decoder.close();
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Shape s2=(Shape) pane.getChildren().get(0);
-        assert(s2.getLayoutX()==s.getLayoutX());
-        assert(s2.getLayoutY()==s.getLayoutY());
+        Shape s2=(Shape) this.pane.getChildren().get(0);
+        assert(s2.getLayoutX()==this.s.getLayoutX());
+        assert(s2.getLayoutY()==this.s.getLayoutY());
     }
 }

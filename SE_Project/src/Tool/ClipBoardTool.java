@@ -20,7 +20,7 @@ import javafx.scene.shape.Shape;
  */
 public final class ClipBoardTool extends Tool {
     private SelectTool selectTool;
-    private Shape copy,toCopy;
+    private Shape copy, toCopy;
     private byte[] myStream;
     
     private static ClipBoardTool instance=null;

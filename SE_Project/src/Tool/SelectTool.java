@@ -59,11 +59,11 @@ public class SelectTool extends Tool {
     }
 
     public double getWidth() {
-        return this.selectedShape.getLayoutBounds().getWidth()*this.selectedShape.getScaleX();
+        return (double)this.selectedShape.getLayoutBounds().getWidth()*this.selectedShape.getScaleX();
     }
 
     public double getHeight() {
-        return this.selectedShape.getLayoutBounds().getHeight()*this.selectedShape.getScaleY();
+        return (double)this.selectedShape.getLayoutBounds().getHeight()*this.selectedShape.getScaleY();
     }
     
     public void setSelectedShape(Shape selectedShape) {

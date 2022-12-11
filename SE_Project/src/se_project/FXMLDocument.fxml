@@ -128,12 +128,12 @@
         <items>
           <MenuItem fx:id="move" mnemonicParsing="false" onAction="#moveShape" text="Move" />
             <MenuItem fx:id="recolor" mnemonicParsing="false" onAction="#recolorShape" text="Recolor" />
-            <MenuItem fx:id="delete" mnemonicParsing="false" onAction="#deleteaShape" text="Delete" />
-            <MenuItem fx:id="foreground" mnemonicParsing="false" onAction="#toFrontShape" text="Foreground" />
+            <MenuItem fx:id="delete" mnemonicParsing="false" onAction="#deleteShape" text="Delete" />
             <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#copyShape" text="Copy" />
             <MenuItem fx:id="cut" mnemonicParsing="false" onAction="#cutShape" text="Cut" />
             <MenuItem fx:id="paste" mnemonicParsing="false" onAction="#pasteShape" text="Paste" />
             <MenuItem fx:id="resize" mnemonicParsing="false" onAction="#resizeShape" text="Resize" />
+            <MenuItem fx:id="foreground" mnemonicParsing="false" onAction="#toFrontShape" text="Foreground" />
             <MenuItem fx:id="background" mnemonicParsing="false" onAction="#toBackShape" text="Background" />
         </items>
       </ContextMenu>

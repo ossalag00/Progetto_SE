@@ -22,23 +22,23 @@ public class TestSelect {
     
     @Before
     public void setUp() {
-        drawingPane = new Pane();
-        shape1 = new Ellipse(11,12,67,81);
-        shape2 = new Line(11,21,76,18);
-        tool = new SelectToolForTest();
-        drawingPane.getChildren().add(this.shape1);
-        drawingPane.getChildren().add(this.shape2);        
+        this.drawingPane = new Pane();
+        this.shape1 = new Ellipse(11,12,67,81);
+        this.shape2 = new Line(11,21,76,18);
+        this.tool = new SelectToolForTest();
+        this.drawingPane.getChildren().add(this.shape1);
+        this.drawingPane.getChildren().add(this.shape2);        
     }
     
     @Test
     public void testSelect(){
         this.tool.select(shape1);
-        Shape s = tool.getSelectedShape();
+        Shape s = this.tool.getSelectedShape();
         assertEquals(s,shape1);
-        assertTrue(!tool.isToggle());
-        tool.deSelect();
-        assertTrue(tool.isToggle());
-        assertNull(tool.getSelectedShape());
+        assertTrue(!this.tool.isToggle());
+        this.tool.deSelect();
+        assertTrue(this.tool.isToggle());
+        assertNull(this.tool.getSelectedShape());
         
     }
     

@@ -5,11 +5,11 @@ import javafx.scene.shape.Shape;
 
 public class ResizeCommand implements Command {
     private SelectTool selectTool;
-    private Double newWidth;
-    private Double newHeight;
+    private double newWidth;
+    private double newHeight;
     private Shape shape;
-    private Double currentScaleX;
-    private Double currentScaleY;
+    private double currentScaleX;
+    private double currentScaleY;
     
     public ResizeCommand(SelectTool selectTool, Double newWidth, Double newHeight) {
         this.selectTool = selectTool;
@@ -23,11 +23,10 @@ public class ResizeCommand implements Command {
 
     @Override
     public void execute() {
-       Double widthScale = (newWidth/this.selectTool.getSelectedShape().getLayoutBounds().getWidth());
-       Double heightScale = (newHeight/this.selectTool.getSelectedShape().getLayoutBounds().getHeight());
+       double widthScale = (newWidth/this.selectTool.getSelectedShape().getLayoutBounds().getWidth());
+       double heightScale = (newHeight/this.selectTool.getSelectedShape().getLayoutBounds().getHeight());
        this.selectTool.getSelectedShape().setScaleY(heightScale);
-       this.selectTool.getSelectedShape().setScaleX(widthScale);
-             
+       this.selectTool.getSelectedShape().setScaleX(widthScale); 
     }
 
     @Override

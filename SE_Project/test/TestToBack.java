@@ -10,36 +10,31 @@ import static org.junit.Assert.*;
 
 public class TestToBack {
     
-    Shape s1,s2;
-    Pane pane;
-    ToBackCommand toBackCommand;
-    SelectToolForTest selectTool;
-    
-    
-    public TestToBack() {
-    }
-
+    private Shape s1,s2;
+    private Pane pane;
+    private ToBackCommand toBackCommand;
+    private SelectToolForTest selectTool;
     
     @Before
     public void setUp() {
-        pane=new Pane();
-        s1=new Line(5,10,30,50);
-        s2=new Rectangle(3,5,60,55);
-        selectTool=new SelectToolForTest();
-        pane.getChildren().add(s1);
-        pane.getChildren().add(s2);
-        this.selectTool.setSelectedShape(s2);
-        toBackCommand=new ToBackCommand(selectTool);
+        this.pane=new Pane();
+        this.s1=new Line(5,10,30,50);
+        this.s2=new Rectangle(3,5,60,55);
+        this.selectTool=new SelectToolForTest();
+        this.pane.getChildren().add(this.s1);
+        this.pane.getChildren().add(this.s2);
+        this.selectTool.setSelectedShape(this.s2);
+        this.toBackCommand=new ToBackCommand(this.selectTool);
     }
     
     @Test
     public void testBack(){
-        toBackCommand.execute();
-        assertEquals(1,pane.getChildren().indexOf(s1));
-        assertEquals(0,pane.getChildren().indexOf(s2));
-        toBackCommand.undo();
-        assertEquals(1,pane.getChildren().indexOf(s2));
-        assertEquals(0,pane.getChildren().indexOf(s1));
+        this.toBackCommand.execute();
+        assertEquals(1,this.pane.getChildren().indexOf(this.s1));
+        assertEquals(0,this.pane.getChildren().indexOf(this.s2));
+        this.toBackCommand.undo();
+        assertEquals(1,this.pane.getChildren().indexOf(this.s2));
+        assertEquals(0,this.pane.getChildren().indexOf(this.s1));
         
     }
 }

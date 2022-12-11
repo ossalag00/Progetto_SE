@@ -34,12 +34,12 @@ public class TestDelete {
     public void testDelete(){
         DeleteCommand instance;
         this.tool.select(this.lineToDelete);
-        instance = new DeleteCommand(tool, drawingPane);
+        instance = new DeleteCommand(this.tool, this.drawingPane);
         instance.execute();
-        assertFalse(drawingPane.getChildren().contains(lineToDelete));
-        assertTrue(drawingPane.getChildren().contains(rectangle));
-        assertEquals(size - 1, drawingPane.getChildren().size());
+        assertFalse(this.drawingPane.getChildren().contains(lineToDelete));
+        assertTrue(this.drawingPane.getChildren().contains(rectangle));
+        assertEquals(this.size - 1, this.drawingPane.getChildren().size());
         instance.undo();
-        assertTrue(drawingPane.getChildren().contains(lineToDelete));
+        assertTrue(this.drawingPane.getChildren().contains(lineToDelete));
     }
 }
