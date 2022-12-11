@@ -50,7 +50,8 @@ public final class ClipBoardTool extends Tool {
         
         try (XMLDecoder decoder = new XMLDecoder(new ByteArrayInputStream(myStream))) {
             this.copy= (Shape) decoder.readObject();
-            this.copy.setEffect(null);
+            if(this.copy!=null)
+                this.copy.setEffect(null);
             return this.copy;
         }
     }

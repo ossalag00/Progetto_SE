@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-import Tool.SelectTool;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
@@ -13,15 +12,12 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author ciroc
- */
+
 public class TestSelect {
     private Pane drawingPane;
     private Shape shape1;
     private Shape shape2;
-    private SelectTool tool;
+    private SelectToolForTest tool;
     
     
     @Before
@@ -29,7 +25,7 @@ public class TestSelect {
         drawingPane = new Pane();
         shape1 = new Ellipse(11,12,67,81);
         shape2 = new Line(11,21,76,18);
-        tool = new SelectTool();
+        tool = new SelectToolForTest();
         drawingPane.getChildren().add(this.shape1);
         drawingPane.getChildren().add(this.shape2);        
     }

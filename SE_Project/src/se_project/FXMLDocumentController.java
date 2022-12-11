@@ -27,6 +27,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.ContextMenuEvent;
@@ -91,6 +92,8 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem resize;
     @FXML
     private MenuItem background;
+    @FXML
+    private ScrollPane scrollPane;
     
     
     
@@ -100,8 +103,11 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         shapeText.setEditable(false);
         recTool.setDrawingWindow(DrawingWindow);
+        recTool.setScrollPane(scrollPane);
+        ellipseTool.setScrollPane(scrollPane);
         ellipseTool.setDrawingWindow(DrawingWindow);
         lineTool.setDrawingWindow(DrawingWindow);
+        lineTool.setScrollPane(scrollPane);
         paste.setDisable(true);
         move.setDisable(true);
         recolor.setDisable(true);
@@ -109,6 +115,7 @@ public class FXMLDocumentController implements Initializable {
         foreground.setDisable(true);
         copy.setDisable(true);
         cut.setDisable(true);
+        resize.setDisable(true);
         selectTool.setTextField(width, height);
     }    
     
@@ -123,6 +130,7 @@ public class FXMLDocumentController implements Initializable {
                 foreground.setDisable(false);
                 copy.setDisable(false);
                 cut.setDisable(false);
+                resize.setDisable(false);
             }else{
                 move.setDisable(true);
                 recolor.setDisable(true);
@@ -130,6 +138,7 @@ public class FXMLDocumentController implements Initializable {
                 foreground.setDisable(true);
                 copy.setDisable(true);
                 cut.setDisable(true);
+                resize.setDisable(true);
             }
         }
 

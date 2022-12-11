@@ -17,9 +17,9 @@ public class PasteCommandForTest {
     private Shape pasted;
     private ClipBoardTool clipBoard;
     private Pane pane;
-    private SelectTool selectTool;
+    private SelectToolForTest selectTool;
     
-    public PasteCommandForTest (SelectTool tool,Pane pane){
+    public PasteCommandForTest (SelectToolForTest tool,Pane pane){
         this.pane=pane;
         this.selectTool=tool;
         this.clipBoard=ClipBoardTool.getInstance(tool);
@@ -37,6 +37,9 @@ public class PasteCommandForTest {
         
     }
     
+    public void undo(){
+        this.pane.getChildren().remove(this.pasted);
+    }
     
 }
 

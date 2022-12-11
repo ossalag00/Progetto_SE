@@ -7,11 +7,13 @@ import Tool.*;
 import command.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import static org.junit.Assert.assertFalse;
 
 public class TestTool {
     Shape line, rect, elli;
     Pane root;
     DrawingTool lineTool,rectTool,ellipseTool;
+    DrawCommand command,command2,command3;
     
    @Before
     public void setup() {
@@ -22,21 +24,21 @@ public class TestTool {
         MouseEvent press = new MouseEvent(MouseEvent.MOUSE_PRESSED, 3,4,6,9,MouseButton.PRIMARY,1,false,false,false,false,false,false,false,false,false,false,null);
         lineTool.mouseDown(press);
         MouseEvent release = new MouseEvent(MouseEvent.MOUSE_RELEASED, 13,14,16,19,MouseButton.PRIMARY,0,false,false,false,false,false,false,false,false,false,false,null);
-        DrawCommand command=new DrawCommand(lineTool,release);
+        command=new DrawCommand(lineTool,release);
         command.execute();
         rectTool=new RectangleTool();
         rectTool.setDrawingWindow(root);
         MouseEvent press2 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 7,8,10,13,MouseButton.PRIMARY,1,false,false,false,false,false,false,false,false,false,false,null);
         rectTool.mouseDown(press2);
         MouseEvent release2 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 12,13,15,18,MouseButton.PRIMARY,0,false,false,false,false,false,false,false,false,false,false,null);
-        DrawCommand command2=new DrawCommand(rectTool,release2);
+        command2=new DrawCommand(rectTool,release2);
         command2.execute();
         ellipseTool= new EllipseTool();
         ellipseTool.setDrawingWindow(root);
         MouseEvent press3 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 3,4,6,9,MouseButton.PRIMARY,1,false,false,false,false,false,false,false,false,false,false,null);
         ellipseTool.mouseDown(press3);
         MouseEvent release3 = new MouseEvent(MouseEvent.MOUSE_RELEASED, 13,14,16,19,MouseButton.PRIMARY,0,false,false,false,false,false,false,false,false,false,false,null);
-        DrawCommand command3=new DrawCommand(ellipseTool,release3);
+        command3=new DrawCommand(ellipseTool,release3);
         command3.execute();
         
     }
@@ -47,6 +49,12 @@ public class TestTool {
         assert(root.getChildren().contains(lineTool.getDrawnShape()));
         assert(root.getChildren().contains(rectTool.getDrawnShape()));
         assert(root.getChildren().contains(ellipseTool.getDrawnShape()));
+        command.undo();
+        command2.undo();
+        command3.undo();
+        assertFalse(root.getChildren().contains(lineTool.getDrawnShape()));
+        assertFalse(root.getChildren().contains(rectTool.getDrawnShape()));
+        assertFalse(root.getChildren().contains(ellipseTool.getDrawnShape()));
     }
     
     @Test

@@ -29,6 +29,16 @@ public class EllipseTool extends DrawingTool{
         ellipse.setFill(this.in);
         ellipse.setStroke(this.getOut());
         this.getDrawingWindow().getChildren().add(ellipse);
+         if(ellipse.getBoundsInParent().getMaxX()>this.getDrawingWindow().getWidth()){
+            this.getDrawingWindow().setPrefSize(ellipse.getBoundsInParent().getMaxX()+100,this.getDrawingWindow().getHeight());
+            this.getScrollPane().layout();
+            this.getScrollPane().setHvalue(1);
+        }
+        if(ellipse.getBoundsInParent().getMaxY()>this.getDrawingWindow().getHeight()){
+            this.getDrawingWindow().setPrefSize(this.getDrawingWindow().getPrefWidth(),ellipse.getBoundsInParent().getMaxY()+100);
+            this.getScrollPane().layout();
+            this.getScrollPane().setVvalue(1);
+        }
         this.setDrawnShape(ellipse);
         
     }/*Sovrascriviamo il metodo della classe astratta estesa così da ottenere 

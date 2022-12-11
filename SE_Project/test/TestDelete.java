@@ -1,5 +1,4 @@
 
-import Tool.SelectTool;
 import command.DeleteCommand;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -13,7 +12,7 @@ import org.junit.Test;
 
 public class TestDelete {
     private Pane drawingPane;
-    private SelectTool tool;
+    private SelectToolForTest tool;
     private Shape lineToDelete;
     private Shape rectangle;
     private int size;
@@ -23,7 +22,7 @@ public class TestDelete {
         this.drawingPane = new Pane();
         this.lineToDelete = new Line(7,31,11,52);
         this.rectangle = new Rectangle(20,34,71,37);
-        this.tool=new SelectTool();
+        this.tool=new SelectToolForTest();
         this.drawingPane.getChildren().add(lineToDelete);
         this.drawingPane.getChildren().add(rectangle);
         this.size = drawingPane.getChildren().size();
@@ -40,8 +39,7 @@ public class TestDelete {
         assertFalse(drawingPane.getChildren().contains(lineToDelete));
         assertTrue(drawingPane.getChildren().contains(rectangle));
         assertEquals(size - 1, drawingPane.getChildren().size());
-
-        
-
+        instance.undo();
+        assertTrue(drawingPane.getChildren().contains(lineToDelete));
     }
 }

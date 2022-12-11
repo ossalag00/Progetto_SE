@@ -3,34 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
 
-import command.PasteCommand;
 import Tool.ClipBoardTool;
-import Tool.SelectTool;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author giorgino
- */
-public class TestPaste {
+ public class TestPaste {
     
     private Shape pasted,toPaste;
     private ClipBoardTool clipBoard;
     private Pane pane;
-    private SelectTool selectTool;
+    private SelectToolForTest selectTool;
     
     
     @Before
     public void setUp() {
-        selectTool=new SelectTool();
+        selectTool=new SelectToolForTest();
         pane=new Pane();
         toPaste = new Rectangle(10,10,20,20);
         clipBoard = ClipBoardTool.getInstance(this.selectTool);
@@ -48,6 +39,8 @@ public class TestPaste {
         assertEquals(pasted.getLayoutY(),toPaste.getLayoutY(),0.1);
         assertEquals(pasted.getFill(),toPaste.getFill());
         assertEquals(pasted.getStroke(),toPaste.getStroke());
+        command.undo();
+        assertFalse(pane.getChildren().contains(pasted));
     }
     
     

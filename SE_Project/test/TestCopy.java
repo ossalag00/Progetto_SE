@@ -4,26 +4,22 @@
  */
 
 import Tool.ClipBoardTool;
-import Tool.SelectTool;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author giorgino
- */
+
 public class TestCopy {
     
-    private SelectTool selectTool;
+    private SelectToolForTest selectTool;
     private ClipBoardTool clipBoard;
     private Shape copy,shapeToCopy;
    
     @Before
     public void setUp() {
-        this.selectTool=new SelectTool();
+        this.selectTool=new SelectToolForTest();
         this.clipBoard= ClipBoardTool.getInstance(this.selectTool);
         this.shapeToCopy=new Rectangle(10,19,20,30);
     }
@@ -36,7 +32,8 @@ public class TestCopy {
         assertEquals(this.copy.getLayoutY(),this.selectTool.getSelectedShape().getLayoutY(),0.1);
         assertEquals(this.copy.getFill(),this.selectTool.getSelectedShape().getFill());
         assertEquals(this.copy.getStroke(),this.selectTool.getSelectedShape().getStroke());
-        
+        copyCommand.undo();
+        assertEquals(this.clipBoard.getClipBoardTool(),null);
         
     }
     

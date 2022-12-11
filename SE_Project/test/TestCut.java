@@ -5,7 +5,6 @@
 
 import command.CutCommand;
 import Tool.ClipBoardTool;
-import Tool.SelectTool;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -13,12 +12,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author giorgino
- */
+
 public class TestCut {
-    private SelectTool selectTool;
+    private SelectToolForTest selectTool;
     private ClipBoardTool clipBoard;
     private Shape copy,shapeToCopy;
     private Pane pane;
@@ -29,7 +25,7 @@ public class TestCut {
     @Before
     public void setUp() {
         this.pane=new Pane();
-        this.selectTool=new SelectTool();
+        this.selectTool=new SelectToolForTest();
         this.clipBoard= ClipBoardTool.getInstance(this.selectTool);
         this.shapeToCopy=new Rectangle(10,19,20,30);
         this.pane.getChildren().add(this.shapeToCopy);
@@ -48,8 +44,9 @@ public class TestCut {
         assertEquals(this.copy.getFill(),this.shapeToCopy.getFill());
         assertEquals(this.copy.getStroke(),this.shapeToCopy.getStroke());
         assertFalse(this.pane.getChildren().contains(this.shapeToCopy));
-        
-        
-        
+        selectTool.deSelect();
+        cutCommand.undo();
+        assertEquals(this.clipBoard.getClipBoardTool(),null);    
+        assertTrue(this.pane.getChildren().contains(shapeToCopy));
     }
 }

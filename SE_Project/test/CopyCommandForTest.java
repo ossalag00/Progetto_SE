@@ -7,19 +7,15 @@
 import Tool.*;
 import javafx.scene.shape.Shape;
 
-/**
- *
- * @author giorgino
- */
 public class CopyCommandForTest{
     
-    private SelectTool selectTool;
+    private SelectToolForTest selectTool;
     private ClipBoardTool clipBoard;
     
     
     
     
-    public  CopyCommandForTest(SelectTool tool){
+    public  CopyCommandForTest(SelectToolForTest tool){
         this.selectTool=tool;
         this.clipBoard= ClipBoardTool.getInstance(tool);
     }
@@ -33,6 +29,10 @@ public class CopyCommandForTest{
         return null;
     }
     
+    public void undo(){
+        this.selectTool.deSelect();
+        this.clipBoard.setClipBoardTool(null);
+    }
    
     
 }

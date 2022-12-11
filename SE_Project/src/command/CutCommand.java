@@ -7,21 +7,21 @@ package command;
 import Tool.ClipBoardTool;
 import Tool.SelectTool;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
 
-/**
- *
- * @author giorgino
- */
+
 public class CutCommand implements Command {
      
     private SelectTool selectTool;
     private ClipBoardTool clipBoard;
     private Pane pane;
+    private Shape s;
     
     public  CutCommand(SelectTool tool,Pane pane){
         this.selectTool=tool;
         this.pane=pane;
         this.clipBoard= ClipBoardTool.getInstance(tool);
+        this.s=tool.getSelectedShape();
     }
 
     @Override
@@ -34,8 +34,8 @@ public class CutCommand implements Command {
     @Override
     public void undo() {
         this.clipBoard.setClipBoardTool(null);
-        this.pane.getChildren().add(this.selectTool.getSelectedShape());
-        this.selectTool.getSelectedShape().setEffect(null);
+        this.pane.getChildren().add(s);
+        this.s.setEffect(null);
     }
     
 }

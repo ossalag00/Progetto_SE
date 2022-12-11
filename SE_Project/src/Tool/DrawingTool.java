@@ -4,6 +4,7 @@
  */
 package Tool;
 
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,6 +17,7 @@ public abstract class DrawingTool extends Tool {
     private double startY;
     private Shape drawnShape;
     private Color out=Color.BLACK;
+    private ScrollPane scrollPane;
 
     public DrawingTool() {
     }
@@ -66,6 +68,14 @@ public abstract class DrawingTool extends Tool {
 
     public void setDrawnShape(Shape drawnShape) {
         this.drawnShape = drawnShape;
+    }
+
+    public void setScrollPane(ScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
+
+    public ScrollPane getScrollPane() {
+        return scrollPane;
     }
     
     public void erase(Shape s){

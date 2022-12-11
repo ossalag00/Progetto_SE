@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -108,7 +109,11 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="703.0" prefWidth="924.0">
                      <children>
-                        <Pane fx:id="DrawingWindow" layoutX="90.0" layoutY="-1.0" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" prefHeight="731.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
+                        <ScrollPane fx:id="scrollPane" layoutY="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+                           <content>
+                              <Pane fx:id="DrawingWindow" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" prefHeight="1200.0" prefWidth="1200.0" />
+                           </content>
+                        </ScrollPane>
                      </children>
                   </AnchorPane>
               </items>
